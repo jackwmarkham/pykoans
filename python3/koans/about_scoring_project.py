@@ -36,27 +36,26 @@ def score(dice):
     total = 0
     counts = {1:0,2:0,3:0,4:0,5:0,6:0}
     
-    for n in dice:
-        counts[n] += 1
-    print(dice)
-    print(counts)
-    print(counts.values())
-    while counts.values() > 0:
-        for k, v in counts:
-            print("here")   
+    if dice == []:
+        return 0
+    else:
+        for n in dice:
+            counts[n] += 1
+ 
+    while sum(list(counts.values())) > 0:
+        for k, v in counts.items():
             if v >= 3:
                 if k == 1:
                     total = total + 1000
                 else:
                     total = total + k*100
-                v = v - 3
+                counts[k] = v - 3
             elif v > 0:
                 if k == 1:
                     total = total + 100*v
                 elif k == 5:
                     total = total + 50*v
-                v = 0
-    print(total)
+                counts[k] = 0
     return total
 
 class AboutScoringProject(Koan):
